@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Post from './Post';
+import Article from './Article';
 
 export default class News extends Component {
     constructor() {
@@ -26,14 +26,14 @@ export default class News extends Component {
     };
 
     showArticles = () => {
-        return this.state.articles.map((a, index) => <Post key={index} article={a}/>)
+        return this.state.articles.map((a, index) => <Article key={index} article={a}/>)
     }
 
 
     render() {
         return (
             <div>
-                <h1>New Page</h1>
+                <h1>News Page</h1>
                 <main className='row'>
                     {this.showArticles()}
                 </main>
