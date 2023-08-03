@@ -17,14 +17,14 @@ export default class CreatePost extends Component {
             title,
             caption,
             img_url: imgUrl,
-            user_id: 1
         }
 
         const url = BACKEND_URL + '/api/posts/create'
         const options = {
             method: "POST",
             headers: {
-                "Content-Type": 'application/json'
+                "Content-Type": 'application/json',
+                Authorization: `Bearer ${this.props.user.token}`
             },
             body: JSON.stringify(body)
         }

@@ -34,9 +34,8 @@ export default class Post extends Component {
         const res = await fetch(url, {
             method: "POST",
             headers: {
-                "Content-Type": 'application/json'
+                Authorization: `Bearer ${this.props.user.token}`
             },
-            body: JSON.stringify({user_id: 1})
         });
 
         const data = await res.json();
@@ -58,10 +57,13 @@ export default class Post extends Component {
                     <h6 className="card-subtitle mb-2 text-body-secondary">{p.author}</h6>
                     <p className="card-text">{p.caption}</p>
                     {
-                        this.state.liked?
-                        <AiFillHeart onClick={()=>this.handleClick('unlike')}/>
-                        :
-                        <AiOutlineHeart onClick={()=>this.handleClick('like')}/>
+                        this.props.user.token?
+                            this.state.liked?
+                            <AiFillHeart onClick={()=>this.handleClick('unlike')}/>
+                            :
+                            <AiOutlineHeart onClick={()=>this.handleClick('like')}/>
+                            :
+                            <></>
                     }
                 </div>
                 <div className="card-footer text-body-secondary">

@@ -5,16 +5,21 @@ import News from "./News";
 import Feed from "./Feed";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CreatePost from "./CreatePost";
+import SignUp from "./SignUp";
+import Login from "./Login";
 
 class App extends Component {
   constructor(){
     super();
     this.state = {
-      user: {
-        username: "sho",
-        email: 'shohat@codingtemple.com'
-      }
+      user: {}
     }
+  };
+
+  logMeIn = (user) => {
+    this.setState({
+      user: user
+    })
   }
   
 
@@ -24,10 +29,12 @@ class App extends Component {
         <div className="App">
           <Navbar user={this.state.user} x='hi'/>
           <Routes>
-            <Route path="/" element={<Home user={this.state.user} x='hi'/>}/>
-            <Route path='/posts' element={<Feed />}/>
+            <Route path="/" element={<Home user={this.state.user}/>}/>
+            <Route path='/posts' element={<Feed user={this.state.user}/>}/>
             <Route path='/news' element={<News />}/>
-            <Route path='/posts/create' element={<CreatePost />}/>
+            <Route path='/posts/create' element={<CreatePost user={this.state.user}/>}/>
+            <Route path='/signup' element={<SignUp />}/>
+            <Route path='/login' element={<Login logMeIn={this.logMeIn} />}/>
           </Routes> 
 
         </div>

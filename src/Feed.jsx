@@ -16,7 +16,17 @@ export default class Feed extends Component {
     }
 
     getPosts = async () => {
-        const res = await fetch(BACKEND_URL + '/api/posts');
+        let res
+        if (this.props.user.token){ // logged in
+            res = await fetch(BACKEND_URL + '/api/posts', {
+                headers:{
+                    Authorization: `Bearer ${this.props.user.token}`
+                }
+            });
+        }
+        else {
+            res = await fetch(BACKEND_URL + '/api/posts');
+        }
         const data = await res.json();
         console.log(data)
         if (data.status ==='ok'){
@@ -27,7 +37,7 @@ export default class Feed extends Component {
     };
 
     showPosts = () => {
-        return this.state.posts.map(p=><Post key={p.id} post={p}  />)
+        return this.state.posts.map(p=><Post key={p.id} post={p} user={this.props.user} />)
     };
 
     render() {
