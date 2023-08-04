@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CreatePost from "./CreatePost";
 import SignUp from "./SignUp";
 import Login from "./Login";
+import NewsFunction from "./NewsFunction";
 
 class App extends Component {
   constructor(){
@@ -32,6 +33,7 @@ class App extends Component {
             <Route path="/" element={<Home user={this.state.user}/>}/>
             <Route path='/posts' element={<Feed user={this.state.user}/>}/>
             <Route path='/news' element={<News />}/>
+            <Route path='/news2' element={<NewsFunction />}/>
             <Route path='/posts/create' element={<CreatePost user={this.state.user}/>}/>
             <Route path='/signup' element={<SignUp />}/>
             <Route path='/login' element={<Login logMeIn={this.logMeIn} />}/>

@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
+import { Navigate } from 'react-router-dom';
 
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export default class CreatePost extends Component {
+    constructor(){
+        super();
+        this.state = {
+            redirect: false
+        }
+    }
 
 
     handleSubmit = async (e) => {
@@ -32,9 +39,17 @@ export default class CreatePost extends Component {
         const res = await fetch(url, options);
         const data = await res.json();
         console.log(data)
+        if (data.status === 'ok'){
+            this.setState({
+                redirect: true
+            })
+        }
     };
 
     render() {
+        if (this.state.redirect) {
+            return <Navigate to='/posts'/>
+        }
         return (
             <div >
                 <h1 className='text-center'>Create a Post</h1>

@@ -13,8 +13,6 @@ export default class News extends Component {
         this.getArticles()
     }
 
-
-
     getArticles = async () => {
         const res = await fetch('https://newsapi.org/v2/everything?q=bitcoin&apiKey=4ba2cb57066b49e2b7a8f20f5e0f65c6');
         const data = await res.json();
@@ -28,7 +26,6 @@ export default class News extends Component {
     showArticles = () => {
         return this.state.articles.map((a, index) => <Article key={index} article={a}/>)
     }
-
 
     render() {
         return (
