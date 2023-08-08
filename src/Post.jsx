@@ -13,7 +13,7 @@ export default class Post extends Component {
     }
 
     componentDidMount(){
-        console.log('MOUNTED', this.props.post)
+        // console.log('MOUNTED', this.props.post)
         if (this.props.post){
             this.setState({liked: this.props.post.liked})
         }
@@ -47,7 +47,7 @@ export default class Post extends Component {
         });
 
         const data = await res.json();
-        console.log(data)
+        // console.log(data)
         if (data.status === 'ok'){
             // dont do anything
         } else{

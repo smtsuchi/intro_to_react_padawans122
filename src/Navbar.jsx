@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ user }) => {
+const Navbar = ({ user, cart, getTotal, logMeOut }) => {
 
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -22,18 +22,31 @@ const Navbar = ({ user }) => {
                             <Link className="nav-link" to="/posts">Feed</Link>
                         </li>
                         <li className="nav-item">
+                            <Link className="nav-link" to="/shop">Shop</Link>
+                        </li>
+                        <li className="nav-item">
                             <Link className="nav-link" to="/posts/create">+</Link>
                         </li>
-                        <li className="nav-item dropdown">
-                            <button className="nav-link dropdown-toggle cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
-                            </button>
-                            <ul className="dropdown-menu">
-                                <li><Link className="dropdown-item" to="/login">Login</Link></li>
-                                <li><Link className="dropdown-item" to="/signup">Sign Up</Link></li>
-                                <li><hr className="dropdown-divider" /></li>
-                                <li><Link className="dropdown-item" to="/">Something else here</Link></li>
-                            </ul>
+                        {user.token ? (
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/login" onClick={logMeOut}>Log Out</Link>
+                            </li>
+                        ) : (
+                            <li className="nav-item dropdown">
+                                <button className="nav-link dropdown-toggle cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Dropdown
+                                </button>
+                                <ul className="dropdown-menu">
+                                    <li><Link className="dropdown-item" to="/login">Login</Link></li>
+                                    <li><Link className="dropdown-item" to="/signup">Sign Up</Link></li>
+                                    <li><hr className="dropdown-divider" /></li>
+                                    <li><Link className="dropdown-item" to="/">Something else here</Link></li>
+                                </ul>
+                            </li>
+                        )}
+
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/cart">{cart.length} | ${getTotal()}</Link>
                         </li>
                         <li className="nav-item">
                             <p className="nav-link disabled" aria-disabled="true">{user.username}</p>
@@ -47,7 +60,7 @@ const Navbar = ({ user }) => {
             </div>
         </nav>
 
-     
+
     )
 }
 
